@@ -10,11 +10,8 @@ import SettingsPage from '../pages/SettingsPage';
 import OverviewPage from '../pages/OverviewPage';
 import InventoryPage from '../pages/InventoryPage';
 import PlanPage from '../pages/PlanPage';
-
-function Placeholder({ name }: { name: string }) {
-  return <div><h2>{name}</h2><p>This is a placeholder for {name}.</p></div>;
-}
-
+import ComparePage from '../pages/ComparePage';
+import AssetDetailsPage from '../pages/AssetDetailsPage';
 export default function App() {
   return (
     <BrowserRouter>
@@ -24,11 +21,11 @@ export default function App() {
           <Route index element={<OverviewPage />} />
           <Route path="import" element={<ImportPage />} />
           <Route path="inventory" element={<InventoryPage />} />
-          <Route path="assets/:id" element={<Placeholder name="Asset Details" />} />
+          <Route path="assets/:id" element={<AssetDetailsPage />} />
           <Route path="graph" element={<GraphPage />} />
           <Route path="scenarios" element={<ScenariosPage />} />
           <Route path="plan" element={<PlanPage />} />
-          <Route path="compare" element={<Placeholder name="Compare" />} />
+          <Route path="compare" element={<ComparePage />} />
           <Route path="reports" element={<ReportsPage />} />
           <Route path="coverage" element={<CoveragePage />} />
           <Route path="settings" element={<SettingsPage />} />

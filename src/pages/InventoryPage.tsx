@@ -1,9 +1,11 @@
 import { ShieldAlert, ShieldCheck, Key, Code, HelpCircle } from 'lucide-react';
 import { useVantage } from '../storage/store';
+import { useNavigate } from 'react-router-dom';
 import type { Asset } from '../domain/types';
 
 export default function InventoryPage() {
   const { reports } = useVantage();
+  const navigate = useNavigate();
   
   // Flatten all assets from all reports
   const allAssets = reports.flatMap(report => report.assets);
@@ -75,7 +77,11 @@ export default function InventoryPage() {
               </thead>
               <tbody className="divide-y divide-[#333]">
                 {allAssets.map(asset => (
-                  <tr key={asset.id} className="hover:bg-[#252525] transition-colors">
+                  <tr 
+                    key={asset.id} 
+                    className="hover:bg-[#252525] transition-colors cursor-pointer"
+                    onClick={() => navigate(`/app/assets/${asset.id}`)}
+                  >
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-[#333] rounded-md">

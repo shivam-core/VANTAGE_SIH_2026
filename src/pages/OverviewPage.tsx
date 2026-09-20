@@ -68,7 +68,7 @@ export default function OverviewPage() {
           </div>
           
           <div className="space-y-4">
-            <Link to="/inventory" className="flex items-center justify-between p-4 bg-[#222] border border-[#444] rounded-lg hover:border-blue-500 transition-colors group">
+            <Link to="/app/inventory" className="flex items-center justify-between p-4 bg-[#222] border border-[#444] rounded-lg hover:border-blue-500 transition-colors group">
               <div>
                 <h4 className="font-medium text-gray-200">Review Inventory</h4>
                 <p className="text-sm text-gray-500">See exactly where vulnerable keys are located.</p>
@@ -76,7 +76,7 @@ export default function OverviewPage() {
               <ArrowRight className="text-gray-600 group-hover:text-blue-500 transition-colors" />
             </Link>
             
-            <Link to="/plan" className="flex items-center justify-between p-4 bg-[#222] border border-[#444] rounded-lg hover:border-purple-500 transition-colors group">
+            <Link to="/app/plan" className="flex items-center justify-between p-4 bg-[#222] border border-[#444] rounded-lg hover:border-purple-500 transition-colors group">
               <div>
                 <h4 className="font-medium text-gray-200">Migration Plan</h4>
                 <p className="text-sm text-gray-500">Get an automated step-by-step PQC migration strategy.</p>
@@ -92,7 +92,7 @@ export default function OverviewPage() {
           {reports.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-48 text-gray-500">
               <p>No scans completed yet.</p>
-              <Link to="/import" className="text-blue-400 hover:underline mt-2">Upload an SBOM to begin</Link>
+              <Link to="/app/import" className="text-blue-400 hover:underline mt-2">Upload an SBOM to begin</Link>
             </div>
           ) : (
             <div className="space-y-4 mt-4">

@@ -24,7 +24,7 @@ export default function ImportPage() {
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
-          navigate('/inventory');
+          navigate('/app/inventory');
         }, 1500);
       }, 1500);
     }

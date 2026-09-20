@@ -1,0 +1,49 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-20T10:00:00Z",
+    "component": {
+      "type": "application",
+      "name": "acme-financial-core",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "jsonwebtoken",
+      "version": "8.5.1",
+      "purl": "pkg:npm/jsonwebtoken@8.5.1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "name": "RSA",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 112,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "bouncycastle",
+      "version": "1.70",
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk15on@1.70",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "name": "ECDSA",
+          "curve": "secp256r1",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    }
+  ]
+}
