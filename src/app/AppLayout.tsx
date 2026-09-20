@@ -20,9 +20,8 @@ export default function AppLayout() {
       {/* Sidebar */}
       <nav className="sidebar">
         <div className="px-6 py-6 border-b" style={{ borderColor: 'var(--border)', marginBottom: 'var(--space-4)' }}>
-          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img src="/logo.png" alt="Vantage Logo" className="w-8 h-8 object-contain" />
-            <h2 className="font-bold text-lg tracking-tight" style={{ margin: 0 }}>Vantage</h2>
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img src="/logo.png" alt="Vantage Logo" className="w-10 h-10 object-contain" />
           </Link>
         </div>
         

@@ -8,9 +8,8 @@ export default function LandingPage() {
     <div className="flex flex-col h-screen w-full" style={{ backgroundColor: 'var(--bg)' }}>
       {/* Top Navigation */}
       <header className="flex justify-between items-center px-6 py-4 border-b" style={{ borderColor: 'var(--border)' }}>
-        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <img src="/logo.png" alt="Vantage Logo" className="w-8 h-8 object-contain" />
-          <span className="font-bold text-lg tracking-tight">Vantage PQC</span>
+        <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+          <img src="/logo.png" alt="Vantage Logo" className="w-10 h-10 object-contain" />
         </Link>
         <div className="flex items-center gap-4">
           <button className="btn btn-ghost">
