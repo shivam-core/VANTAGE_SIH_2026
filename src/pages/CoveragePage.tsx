@@ -3,22 +3,7 @@ import { ShieldAlert, ShieldCheck, FileCode, Clock } from 'lucide-react';
 import { useVantage } from '../storage/store';
 import { Link } from 'react-router-dom';
 
-const languageData = [
-  { name: 'TypeScript', value: 45 },
-  { name: 'Python', value: 30 },
-  { name: 'Java', value: 15 },
-  { name: 'Go', value: 10 },
-];
-
-const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
-
-const trendData = [
-  { name: 'Mon', scanned: 120, found: 4 },
-  { name: 'Tue', scanned: 132, found: 5 },
-  { name: 'Wed', scanned: 101, found: 2 },
-  { name: 'Thu', scanned: 145, found: 8 },
-  { name: 'Fri', scanned: 190, found: 1 },
-];
+const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16', '#06b6d4', '#e11d48'];
 
 export default function CoveragePage() {
   const { filesScanned, reports } = useVantage();
@@ -50,6 +35,16 @@ export default function CoveragePage() {
   while (dynamicTrendData.length < 5) {
     dynamicTrendData.unshift({ name: '-', scanned: 0, found: 0 });
   }
+
+  // Derive algorithm distribution from actual SBOM data
+  const algoCountMap = new Map<string, number>();
+  reports.forEach(r => {
+    r.assets.forEach(a => {
+      const name = a.canonicalName || 'Unknown';
+      algoCountMap.set(name, (algoCountMap.get(name) || 0) + 1);
+    });
+  });
+  const algorithmData = Array.from(algoCountMap.entries()).map(([name, value]) => ({ name, value }));
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -98,12 +93,12 @@ export default function CoveragePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-6">Language Distribution</h2>
+          <h2 className="text-lg font-semibold mb-6">Algorithm Distribution</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={languageData}
+                  data={algorithmData}
                   cx="50%"
                   cy="50%"
                   innerRadius={60}
@@ -111,7 +106,7 @@ export default function CoveragePage() {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {languageData.map((_, index) => (
+                  {algorithmData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
@@ -122,10 +117,10 @@ export default function CoveragePage() {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex justify-center gap-4 mt-4">
-            {languageData.map((entry, index) => (
+          <div className="flex justify-center gap-4 mt-4 flex-wrap">
+            {algorithmData.map((entry, index) => (
               <div key={entry.name} className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }}></div>
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
                 <span className="text-sm text-gray-400">{entry.name}</span>
               </div>
             ))}
