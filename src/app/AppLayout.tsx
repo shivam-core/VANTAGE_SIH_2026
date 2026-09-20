@@ -21,7 +21,7 @@ export default function AppLayout() {
       <nav className="sidebar">
         <div className="px-6 py-6 border-b" style={{ borderColor: 'var(--border)', marginBottom: 'var(--space-4)' }}>
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <img src="/logo.png" alt="Vantage Logo" className="w-10 h-10 object-contain" />
+            <img src="/logo.png" alt="Vantage Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
           </Link>
         </div>
         

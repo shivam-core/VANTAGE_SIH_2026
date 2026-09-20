@@ -9,7 +9,7 @@ export default function LandingPage() {
       {/* Top Navigation */}
       <header className="flex justify-between items-center px-6 py-4 border-b" style={{ borderColor: 'var(--border)' }}>
         <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-          <img src="/logo.png" alt="Vantage Logo" className="w-10 h-10 object-contain" />
+          <img src="/logo.png" alt="Vantage Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
         </Link>
         <div className="flex items-center gap-4">
           <button className="btn btn-ghost">
