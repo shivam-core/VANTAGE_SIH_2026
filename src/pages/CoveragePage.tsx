@@ -82,7 +82,7 @@ export default function CoveragePage() {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {languageData.map((entry, index) => (
+                  {languageData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>

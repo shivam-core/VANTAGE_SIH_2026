@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { UploadCloud, FileJson, Github, FileText, CheckCircle } from 'lucide-react';
+import { UploadCloud, FileJson, GitBranch, FileText, CheckCircle } from 'lucide-react';
 import { useVantage } from '../storage/store';
 
 export default function ImportPage() {
@@ -87,7 +87,7 @@ export default function ImportPage() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between p-4 border border-[#333] rounded-lg bg-[#222]">
               <div className="flex items-center gap-3">
-                <Github size={24} />
+                <GitBranch size={24} />
                 <div>
                   <h3 className="font-medium">GitHub Repository</h3>
                   <p className="text-xs text-gray-400">Scan code on every PR</p>

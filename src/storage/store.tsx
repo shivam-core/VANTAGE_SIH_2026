@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { VantageReport } from '../domain/types';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import type { VantageReport } from '../domain/types';
 
 export interface Settings {
   workspaceName: string;
