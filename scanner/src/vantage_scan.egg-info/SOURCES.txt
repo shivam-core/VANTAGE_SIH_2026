@@ -1,0 +1,14 @@
+pyproject.toml
+src/vantage_scan/__init__.py
+src/vantage_scan/__main__.py
+src/vantage_scan/certificates.py
+src/vantage_scan/cli.py
+src/vantage_scan/python_ast.py
+src/vantage_scan/traverse.py
+src/vantage_scan.egg-info/PKG-INFO
+src/vantage_scan.egg-info/SOURCES.txt
+src/vantage_scan.egg-info/dependency_links.txt
+src/vantage_scan.egg-info/entry_points.txt
+src/vantage_scan.egg-info/requires.txt
+src/vantage_scan.egg-info/top_level.txt
+tests/test_ast.py

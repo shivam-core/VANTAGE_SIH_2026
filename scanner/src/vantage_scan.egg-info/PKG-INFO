@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: vantage-scan
+Version: 1.0.0
+Summary: Local python scanner for Vantage SIH 2026
+Requires-Python: >=3.11
+Requires-Dist: cryptography>=41.0.0
+Provides-Extra: test
+Requires-Dist: pytest>=8.0.0; extra == "test"
