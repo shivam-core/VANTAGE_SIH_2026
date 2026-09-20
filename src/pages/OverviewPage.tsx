@@ -11,7 +11,7 @@ export default function OverviewPage() {
   
   const readinessScore = allAssets.length > 0 
     ? Math.round((safeCount / allAssets.length) * 100) 
-    : 100;
+    : 0;
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
@@ -62,9 +62,15 @@ export default function OverviewPage() {
         <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-6 shadow-lg flex flex-col justify-between">
           <div>
             <h2 className="text-xl font-bold mb-4 border-b border-[#333] pb-2">Next Steps</h2>
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Based on your most recent SBOM import, we have identified cryptographic assets that do not meet NIST standards for Post-Quantum safety.
-            </p>
+            {reports.length === 0 ? (
+              <p className="text-gray-400 mb-6 leading-relaxed">
+                Welcome to Vantage. Get started by importing a Software Bill of Materials (SBOM) to analyze your cryptographic posture.
+              </p>
+            ) : (
+              <p className="text-gray-400 mb-6 leading-relaxed">
+                Based on your most recent SBOM import, we have identified cryptographic assets that do not meet NIST standards for Post-Quantum safety.
+              </p>
+            )}
           </div>
           
           <div className="space-y-4">

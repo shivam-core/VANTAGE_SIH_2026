@@ -1,8 +1,24 @@
-import { Download, Share2, FileText, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
+import { Download, Share2, FileText, CheckCircle, AlertTriangle, Clock, FileSpreadsheet } from 'lucide-react';
 import { useVantage } from '../storage/store';
+import { Link } from 'react-router-dom';
 
 export default function ReportsPage() {
-  const { cryptoAssetsFound } = useVantage();
+  const { cryptoAssetsFound, reports } = useVantage();
+
+  if (reports.length === 0) {
+    return (
+      <div className="p-8 max-w-5xl mx-auto flex flex-col items-center justify-center h-[80vh] text-center">
+        <FileSpreadsheet size={64} className="text-gray-600 mb-4" />
+        <h1 className="text-2xl font-bold mb-2">No Reports Available</h1>
+        <p className="text-gray-400 mb-6">Import an SBOM to generate compliance and readiness reports.</p>
+        <Link to="/app/import" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">Import SBOM</Link>
+      </div>
+    );
+  }
+
+  const latestReport = reports[reports.length - 1];
+  const nonCompliant = latestReport.assets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1' || a.canonicalName?.includes('RSA')).length;
+  const remediationMonths = nonCompliant > 0 ? Math.max(1, Math.ceil(nonCompliant * 1.5)) : 0;
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
@@ -72,7 +88,7 @@ export default function ReportsPage() {
                 <AlertTriangle size={20} />
               </div>
               <div>
-                <p className="text-2xl font-bold">3</p>
+                <p className="text-2xl font-bold">{nonCompliant}</p>
                 <p className="text-sm text-gray-400">Non-compliant for PQC</p>
               </div>
             </div>
@@ -82,7 +98,7 @@ export default function ReportsPage() {
                 <Clock size={20} />
               </div>
               <div>
-                <p className="text-2xl font-bold">4 mos</p>
+                <p className="text-2xl font-bold">{remediationMonths > 0 ? `${remediationMonths} mos` : 'Ready'}</p>
                 <p className="text-sm text-gray-400">Est. Remediation Time</p>
               </div>
             </div>

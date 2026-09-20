@@ -95,7 +95,9 @@ export default function InventoryPage() {
                     </td>
                     <td className="p-4">
                       <div className="flex gap-2 flex-wrap">
-                        {Object.entries(asset.details).map(([k, v]) => (
+                        {Object.entries(asset.details)
+                          .filter(([_, v]) => v !== undefined)
+                          .map(([k, v]) => (
                           <span key={k} className="text-xs bg-[#2a2a2a] text-gray-300 px-2 py-1 rounded">
                             {k}: {String(v)}
                           </span>

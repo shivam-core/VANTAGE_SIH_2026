@@ -72,7 +72,13 @@ export default function AssetDetailsPage() {
                 <dt className="text-sm font-medium text-gray-500 mb-2">Properties</dt>
                 <dd className="bg-[#222] p-4 rounded border border-[#333] overflow-x-auto">
                   <pre className="text-xs text-green-400">
-                    {JSON.stringify(asset.details, null, 2)}
+                    {JSON.stringify(
+                      Object.fromEntries(
+                        Object.entries(asset.details).filter(([_, v]) => v !== undefined)
+                      ),
+                      null, 
+                      2
+                    )}
                   </pre>
                 </dd>
               </div>

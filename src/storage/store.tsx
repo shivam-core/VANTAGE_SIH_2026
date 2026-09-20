@@ -36,18 +36,18 @@ export const VantageProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const [reports, setReportsState] = useState<VantageReport[]>(() => {
-    const saved = localStorage.getItem('vantage-reports');
+    const saved = localStorage.getItem('vantage-reports-v2');
     return saved ? JSON.parse(saved) : [];
   });
 
   const [filesScanned, setFilesScanned] = useState<number>(() => {
-    const saved = localStorage.getItem('vantage-files-scanned');
-    return saved ? JSON.parse(saved) : 12450;
+    const saved = localStorage.getItem('vantage-files-scanned-v2');
+    return saved ? JSON.parse(saved) : 0;
   });
 
   const [cryptoAssetsFound, setCryptoAssetsFound] = useState<number>(() => {
-    const saved = localStorage.getItem('vantage-crypto-assets-found');
-    return saved ? JSON.parse(saved) : 12;
+    const saved = localStorage.getItem('vantage-crypto-assets-found-v2');
+    return saved ? JSON.parse(saved) : 0;
   });
 
   const setSettings = (newSettings: Settings) => {
@@ -58,15 +58,15 @@ export const VantageProvider = ({ children }: { children: ReactNode }) => {
   const addReport = (report: VantageReport) => {
     const newReports = [...reports, report];
     setReportsState(newReports);
-    localStorage.setItem('vantage-reports', JSON.stringify(newReports));
+    localStorage.setItem('vantage-reports-v2', JSON.stringify(newReports));
   };
 
   useEffect(() => {
-    localStorage.setItem('vantage-files-scanned', JSON.stringify(filesScanned));
+    localStorage.setItem('vantage-files-scanned-v2', JSON.stringify(filesScanned));
   }, [filesScanned]);
 
   useEffect(() => {
-    localStorage.setItem('vantage-crypto-assets-found', JSON.stringify(cryptoAssetsFound));
+    localStorage.setItem('vantage-crypto-assets-found-v2', JSON.stringify(cryptoAssetsFound));
   }, [cryptoAssetsFound]);
 
   return (

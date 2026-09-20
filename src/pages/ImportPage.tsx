@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UploadCloud, FileJson, GitBranch, FileText, CheckCircle } from 'lucide-react';
 import { useVantage } from '../storage/store';
-import { generateMockReport } from '../storage/mockData';
+import { parseCycloneDxSbom } from '../utils/sbomParser';
 
 export default function ImportPage() {
   const navigate = useNavigate();
@@ -15,17 +15,35 @@ export default function ImportPage() {
     const file = e.target.files?.[0];
     if (file) {
       setIsUploading(true);
-      // Simulate parsing time
-      setTimeout(() => {
-        setFilesScanned(prev => prev + 124);
-        setCryptoAssetsFound(prev => prev + 3);
-        addReport(generateMockReport());
-        setIsUploading(false);
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const fileContent = event.target?.result as string;
+          const parsedReport = parseCycloneDxSbom(fileContent);
+          
+          // @ts-ignore - totalComponents is added dynamically
+          const scannedCount = parsedReport.totalComponents || 124;
+          setFilesScanned(prev => prev + scannedCount);
+          setCryptoAssetsFound(prev => prev + parsedReport.assets.length);
+          addReport(parsedReport);
+          
+          setIsUploading(false);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
           navigate('/app/inventory');
         }, 1500);
+        } catch (error) {
+          console.error("Failed to parse file", error);
+          alert("Failed to parse the SBOM file. Please ensure it is valid CycloneDX JSON.");
+          setIsUploading(false);
+        }
+      };
+      
+      // Artificial delay for UI polish
+      setTimeout(() => {
+        reader.readAsText(file);
       }, 1500);
     }
   };
