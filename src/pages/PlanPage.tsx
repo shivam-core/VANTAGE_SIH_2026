@@ -1,13 +1,14 @@
 import { AlertTriangle, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useVantage } from '../storage/store';
 import type { Asset } from '../domain/types';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export default function PlanPage() {
   const { reports } = useVantage();
   const allAssets = reports.flatMap(r => r.assets);
   
   // Filter vulnerable assets (mock logic)
-  const vulnerableAssets = allAssets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1');
+  const vulnerableAssets = allAssets.filter(a => isQuantumVulnerable(a.canonicalName));
   
   const getRecommendation = (asset: Asset) => {
     if (asset.canonicalName === 'RSA') {
@@ -26,7 +27,31 @@ export default function PlanPage() {
         timeline: 'Immediate'
       };
     }
-    return { action: 'Review', details: 'No automated recommendation.', effort: 'Unknown', timeline: 'TBD' };
+    if (asset.canonicalName === 'ECDSA' || asset.canonicalName === 'ECDH') {
+      return {
+        action: 'Migrate to FIPS 204 (ML-DSA) or FIPS 203 (ML-KEM)',
+        details: `${asset.canonicalName} relies on elliptic curve discrete log, which Shor's algorithm solves efficiently. Replace with lattice-based PQC standards.`,
+        effort: 'High',
+        timeline: 'Q4 2026'
+      };
+    }
+    if (asset.canonicalName === '3DES' || asset.canonicalName === 'DES') {
+      return {
+        action: 'Migrate to AES-256-GCM',
+        details: '3DES/DES uses 64-bit block size and is deprecated by NIST. Replace with AES-256 in authenticated mode (GCM).',
+        effort: 'Medium',
+        timeline: 'Q2 2026'
+      };
+    }
+    if (asset.canonicalName === 'MD5') {
+      return {
+        action: 'Migrate to SHA-256 or SHA-3',
+        details: 'MD5 is completely broken for collision resistance. Grover\'s algorithm halves effective security. Replace immediately.',
+        effort: 'Low',
+        timeline: 'Immediate'
+      };
+    }
+    return { action: 'Review', details: 'No automated recommendation available for this algorithm.', effort: 'Unknown', timeline: 'TBD' };
   };
 
   return (

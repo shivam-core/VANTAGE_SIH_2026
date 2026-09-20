@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUp, ShieldCheck, ShieldAlert, Columns } from 'lucide-react';
 import { useVantage } from '../storage/store';
 import { Link } from 'react-router-dom';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export default function ComparePage() {
   const { reports } = useVantage();
@@ -30,8 +31,8 @@ export default function ComparePage() {
   const currentReport = reports[reports.length - 1];
   const baselineReport = reports[reports.length - 2];
 
-  const currentVulnerable = currentReport.assets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1' || a.canonicalName?.includes('RSA')).length;
-  const baselineVulnerable = baselineReport.assets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1' || a.canonicalName?.includes('RSA')).length;
+  const currentVulnerable = currentReport.assets.filter(a => isQuantumVulnerable(a.canonicalName)).length;
+  const baselineVulnerable = baselineReport.assets.filter(a => isQuantumVulnerable(a.canonicalName)).length;
 
   const diff = currentVulnerable - baselineVulnerable;
   const improvement = baselineVulnerable > 0 ? Math.round((Math.abs(diff) / baselineVulnerable) * 100) : 0;

@@ -3,6 +3,7 @@ import '@xyflow/react/dist/style.css';
 import { useVantage } from '../storage/store';
 import { Network } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export default function GraphPage() {
   const { reports } = useVantage();
@@ -37,7 +38,7 @@ export default function GraphPage() {
     const y = 200 + Math.floor(index / 5) * 100;
     const id = `asset-${index}`;
     
-    const isVulnerable = assetName === 'RSA' || assetName === 'SHA1' || assetName?.includes('RSA');
+    const isVulnerable = isQuantumVulnerable(assetName);
 
     nodes.push({
       id,

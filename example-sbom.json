@@ -30,6 +30,55 @@
     },
     {
       "type": "library",
+      "name": "node-forge",
+      "version": "1.3.1",
+      "purl": "pkg:npm/node-forge@1.3.1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "name": "SHA1",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 80,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "crypto-js",
+      "version": "4.2.0",
+      "purl": "pkg:npm/crypto-js@4.2.0",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "name": "SHA-256",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 1
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "aes-js",
+      "version": "3.1.2",
+      "purl": "pkg:npm/aes-js@3.1.2",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "name": "AES-256",
+          "mode": "GCM",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 256,
+          "nistQuantumSecurityLevel": 5
+        }
+      }
+    },
+    {
+      "type": "library",
       "name": "bouncycastle",
       "version": "1.70",
       "purl": "pkg:maven/org.bouncycastle/bcprov-jdk15on@1.70",
@@ -38,10 +87,124 @@
         "algorithmProperties": {
           "primitive": "signature",
           "name": "ECDSA",
-          "curve": "secp256r1",
+          "curve": "P-256",
           "executionEnvironment": "software-library",
           "classicSecurityLevel": 128,
           "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "elliptic",
+      "version": "6.5.4",
+      "purl": "pkg:npm/elliptic@6.5.4",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agreement",
+          "name": "ECDH",
+          "curve": "X25519",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "legacy-payment-sdk",
+      "version": "2.1.0",
+      "purl": "pkg:npm/legacy-payment-sdk@2.1.0",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "name": "3DES",
+          "mode": "CBC",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 80,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "md5-hasher",
+      "version": "1.0.0",
+      "purl": "pkg:npm/md5-hasher@1.0.0",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "name": "MD5",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 64,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "aws-sdk-crypto",
+      "version": "5.3.0",
+      "purl": "pkg:npm/@aws-sdk/client-kms@5.3.0",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "mac",
+          "name": "HMAC-SHA256",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 1
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "libsodium-wrappers",
+      "version": "0.7.13",
+      "purl": "pkg:npm/libsodium-wrappers@0.7.13",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "stream-cipher",
+          "name": "ChaCha20-Poly1305",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 256,
+          "nistQuantumSecurityLevel": 5
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "oqs-provider",
+      "version": "0.5.0",
+      "purl": "pkg:npm/oqs-provider@0.5.0",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "name": "ML-KEM-768",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 192,
+          "nistQuantumSecurityLevel": 3
+        }
+      }
+    },
+    {
+      "type": "library",
+      "name": "pqcrypto-sign",
+      "version": "0.9.1",
+      "purl": "pkg:npm/pqcrypto-sign@0.9.1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "name": "ML-DSA-65",
+          "executionEnvironment": "software-library",
+          "classicSecurityLevel": 192,
+          "nistQuantumSecurityLevel": 3
         }
       }
     }

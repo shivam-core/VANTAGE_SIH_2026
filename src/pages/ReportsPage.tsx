@@ -1,6 +1,7 @@
 import { Download, Share2, FileText, CheckCircle, AlertTriangle, Clock, FileSpreadsheet } from 'lucide-react';
 import { useVantage } from '../storage/store';
 import { Link } from 'react-router-dom';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export default function ReportsPage() {
   const { cryptoAssetsFound, reports } = useVantage();
@@ -17,7 +18,7 @@ export default function ReportsPage() {
   }
 
   const latestReport = reports[reports.length - 1];
-  const nonCompliant = latestReport.assets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1' || a.canonicalName?.includes('RSA')).length;
+  const nonCompliant = latestReport.assets.filter(a => isQuantumVulnerable(a.canonicalName)).length;
   const remediationMonths = nonCompliant > 0 ? Math.max(1, Math.ceil(nonCompliant * 1.5)) : 0;
 
   return (

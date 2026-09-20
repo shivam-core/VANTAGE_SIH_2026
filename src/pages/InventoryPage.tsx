@@ -2,6 +2,7 @@ import { ShieldAlert, ShieldCheck, Key, Code, HelpCircle } from 'lucide-react';
 import { useVantage } from '../storage/store';
 import { useNavigate } from 'react-router-dom';
 import type { Asset } from '../domain/types';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export default function InventoryPage() {
   const { reports } = useVantage();
@@ -19,8 +20,7 @@ export default function InventoryPage() {
   };
 
   const getStatusBadge = (asset: Asset) => {
-    // Basic mock logic: RSA and SHA-1 are vulnerable, AES is safe
-    if (asset.canonicalName === 'RSA' || asset.canonicalName === 'SHA1') {
+    if (isQuantumVulnerable(asset.canonicalName)) {
       return (
         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-900/30 text-red-400 border border-red-900/50">
           <ShieldAlert size={12} />
@@ -50,7 +50,7 @@ export default function InventoryPage() {
           </div>
           <div className="bg-red-900/10 border border-red-900/30 rounded-lg p-4 text-center min-w-[120px]">
             <div className="text-2xl font-bold text-red-500">
-              {allAssets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1').length}
+              {allAssets.filter(a => isQuantumVulnerable(a.canonicalName)).length}
             </div>
             <div className="text-xs text-red-400/80 uppercase tracking-wider mt-1">At Risk</div>
           </div>

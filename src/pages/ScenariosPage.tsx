@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useVantage } from '../storage/store';
 import { CalendarClock, Play, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export interface TimelineEvent {
   id: string;
@@ -20,7 +21,7 @@ export default function ScenariosPage() {
   useEffect(() => {
     if (reports.length > 0) {
       const latestReport = reports[reports.length - 1];
-      const vulnerableAssets = latestReport.assets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1' || a.canonicalName?.includes('RSA'));
+      const vulnerableAssets = latestReport.assets.filter(a => isQuantumVulnerable(a.canonicalName));
       
       const newEvents: TimelineEvent[] = [];
       

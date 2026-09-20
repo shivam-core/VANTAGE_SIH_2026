@@ -1,12 +1,13 @@
 import { Activity, ShieldAlert, ShieldCheck, FileCheck, ArrowRight } from 'lucide-react';
 import { useVantage } from '../storage/store';
 import { Link } from 'react-router-dom';
+import { isQuantumVulnerable } from '../utils/pqcClassifier';
 
 export default function OverviewPage() {
   const { reports, filesScanned, cryptoAssetsFound } = useVantage();
   
   const allAssets = reports.flatMap(r => r.assets);
-  const vulnerableCount = allAssets.filter(a => a.canonicalName === 'RSA' || a.canonicalName === 'SHA1').length;
+  const vulnerableCount = allAssets.filter(a => isQuantumVulnerable(a.canonicalName)).length;
   const safeCount = allAssets.length - vulnerableCount;
   
   const readinessScore = allAssets.length > 0 
