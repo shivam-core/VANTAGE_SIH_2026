@@ -24,8 +24,14 @@ const VULNERABLE_ALGORITHMS = new Set([
   'Blowfish',
 ]);
 
+/** Known quantum-safe prefixes that must NOT be flagged even if they contain
+ *  a vulnerable substring (e.g. ML-DSA contains 'DSA'). */
+const SAFE_PREFIXES = ['ML-DSA', 'ML-KEM', 'SLH-DSA', 'XMSS', 'LMS', 'SPHINCS'];
+
 export function isQuantumVulnerable(canonicalName: string | undefined): boolean {
   if (!canonicalName) return false;
+  // Explicitly safe PQC algorithms — never flag these
+  if (SAFE_PREFIXES.some(prefix => canonicalName.startsWith(prefix))) return false;
   // Direct match
   if (VULNERABLE_ALGORITHMS.has(canonicalName)) return true;
   // Substring match for variants like RSA-2048, ECDSA-P384, etc.
