@@ -1,4 +1,4 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, Link } from 'react-router-dom';
 import { LayoutDashboard, FileUp, Database, Network, GitPullRequest, ListTodo, Columns, FileBarChart, ShieldCheck, Settings } from 'lucide-react';
 
 export default function AppLayout() {
@@ -19,12 +19,11 @@ export default function AppLayout() {
     <div className="flex h-screen w-full overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
       {/* Sidebar */}
       <nav className="sidebar">
-        <div className="px-6 py-6 flex items-center gap-3 border-b" style={{ borderColor: 'var(--border)', marginBottom: 'var(--space-4)' }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 22L2 2H8.5L12 11.5L15.5 2H22L12 22Z" fill="white"/>
-            <path d="M17 10L22 2H18L14.5 8L17 10Z" fill="var(--text-muted)"/>
-          </svg>
-          <h2 className="font-bold text-lg tracking-tight" style={{ margin: 0 }}>Vantage</h2>
+        <div className="px-6 py-6 border-b" style={{ borderColor: 'var(--border)', marginBottom: 'var(--space-4)' }}>
+          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img src="/logo.png" alt="Vantage Logo" className="w-8 h-8 object-contain" />
+            <h2 className="font-bold text-lg tracking-tight" style={{ margin: 0 }}>Vantage</h2>
+          </Link>
         </div>
         
         <div className="sidebar-nav overflow-y-auto flex-1">

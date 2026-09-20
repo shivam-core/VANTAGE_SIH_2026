@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { PlayCircle, GitBranch, ArrowDown } from 'lucide-react';
 
 export default function LandingPage() {
@@ -8,13 +8,10 @@ export default function LandingPage() {
     <div className="flex flex-col h-screen w-full" style={{ backgroundColor: 'var(--bg)' }}>
       {/* Top Navigation */}
       <header className="flex justify-between items-center px-6 py-4 border-b" style={{ borderColor: 'var(--border)' }}>
-        <div className="flex items-center gap-3">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 22L2 2H8.5L12 11.5L15.5 2H22L12 22Z" fill="white"/>
-            <path d="M17 10L22 2H18L14.5 8L17 10Z" fill="var(--text-muted)"/>
-          </svg>
+        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <img src="/logo.png" alt="Vantage Logo" className="w-8 h-8 object-contain" />
           <span className="font-bold text-lg tracking-tight">Vantage PQC</span>
-        </div>
+        </Link>
         <div className="flex items-center gap-4">
           <button className="btn btn-ghost">
             <PlayCircle size={16} /> Demo Video
