@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UploadCloud, FileJson, GitBranch, FileText, CheckCircle } from 'lucide-react';
 import { useVantage } from '../storage/store';
+import { generateMockReport } from '../storage/mockData';
 
 export default function ImportPage() {
+  const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { setFilesScanned, setCryptoAssetsFound } = useVantage();
+  const { setFilesScanned, setCryptoAssetsFound, addReport } = useVantage();
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -16,9 +19,13 @@ export default function ImportPage() {
       setTimeout(() => {
         setFilesScanned(prev => prev + 124);
         setCryptoAssetsFound(prev => prev + 3);
+        addReport(generateMockReport());
         setIsUploading(false);
         setSuccess(true);
-        setTimeout(() => setSuccess(false), 3000);
+        setTimeout(() => {
+          setSuccess(false);
+          navigate('/inventory');
+        }, 1500);
       }, 1500);
     }
   };
